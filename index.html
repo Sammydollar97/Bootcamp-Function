@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootcamp Widgets</title>
+    <script src="greet.js"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="greet-widget.js"></script>
+    <script src="enough-airtime.js"></script>
+    <script src="phone-bill.js"></script>
+    <script>
+       // console.log(greet("jed"))
+    </script>
+</head>
+
+<style>
+   body{
+        font-family: 'Franklin Gothic Medium';
+         background-color: transparent;
+        background-image:url(https://www.icegif.com/wp-content/uploads/icegif-790.gif);                
+        font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;               
+        font-size: larger; 
+        background-repeat: no-repeat; 
+        background-size: cover; 
+        height: 100vh;        
+ 
+   }
+         
+   
+    .message {
+        padding: 2em;
+        background-color: lightsalmon;
+        margin-bottom: 2em;
+    }
+
+    .input>label {
+        display: inline-block;
+        width: 15em;
+        padding: 0.5em;
+        font-weight: bold;
+
+    }
+
+    .input>input[type="text"] {
+        padding: 0.5em;
+        margin: 0.5em;
+    }
+    .widgets{
+        display: flex;
+        
+    }
+    .widget{
+        flex: 1;
+        border: 1px solid lightslategray;
+        margin: 1em;
+        padding: 1em; /*content margin*/
+        border-radius: 0.5em;
+    }
+</style>
+
+
+<body>
+   
+    <h1>SAMUEL TLADI ALPINE JS WIDGETS</h1>
+    <div class="widgets">
+        <div class="widget" x-data="greetWidget">
+            <h2>Greet Widget</h2>
+            <div x-show="message.length>0" class="message" x-text="message">
+            <h2>You will be greeted here<h2>
+            </div>
+            <label for="name"><h2>Fill in your names in full</h2></label>
+            <input type="text" x-model="name" id="name">
+            <button x-on:click="greetMe">Greet</button>
+        </div>
+
+        <div class="widget" x-data="{
+        airtimeUsage : '',
+        availableAmount: '0.00',
+        airtimeMessage : '',
+        calculate(){
+           this.airtimeMessage= enoughAirtime(this.airtimeUsage, this.availableAmount)
+        }
+    }">
+            <h1>Enough Airtime</h1>
+            <div class="input">
+                <label for="usage"><h2>Please enter your airtime usage</h2></label>
+                <input type="text" x-model="airtimeUsage" id="usage">
+            </div>
+            <div class="input">
+                <label for="amount"><h2>Amount Available</h2></label>
+                <input type="text" x-model="availableAmount" id="amount">
+
+            </div>
+            <div class="message" x-text="airtimeMessage"> Number of Airtime displayed here
+            </div>
+            <button x-on:click="calculate">Calculate airtime usage</button>
+        </div>
+    </div>
+    <div class="" x-data="{
+        billUsage: '',
+        billMessage: '',
+        billCalculate(){
+            this.billMessage= totalPhoneBill(this.billUsage)
+        }
+    }">
+        <h1>Total Phone Bill</h1>
+        <div class="inpu">
+            <label for="billAmount"> <h2>Enter your calls and sms's made</h2></label>
+            <input type="text" x-model="billUsage" id="billAmount">
+            <button x-on:click="billCalculate">Calculate Total Bill</button>
+        </div>
+        
+        <div class="message" x-text="billMessage"></div>
+    </div>
+</body>
+
+</html>
